@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bwterraingen = { git = "ssh://git@github.com/zzlk/bwterraingen.git" }
+bwterraingen = { git = "https://github.com/zzlk/bwterraingen.git" }
 
 image = { version = "*", features = ["png", "webp"] }
 rand = { version = "*" }
