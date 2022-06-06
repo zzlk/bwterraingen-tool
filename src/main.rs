@@ -14,11 +14,11 @@ fn main() -> Result<()> {
 
     let width = (&args[1]).parse::<usize>()?;
     let height = (&args[2]).parse::<usize>()?;
-    let dest = args[2].clone();
+    let dest = args[3].clone();
 
     anyhow::ensure!(args.len() > 4);
 
-    let rules = args[3..]
+    let rules = args[4..]
         .into_iter()
         .filter_map(|arg| {
             info!("filename: {arg}");
