@@ -14,8 +14,9 @@ fn main() -> Result<()> {
 
     let width = (&args[1]).parse::<usize>()?;
     let height = (&args[2]).parse::<usize>()?;
+    let dest = args[2].clone();
 
-    anyhow::ensure!(args.len() > 3);
+    anyhow::ensure!(args.len() > 4);
 
     let rules = args[3..]
         .into_iter()
@@ -34,7 +35,7 @@ fn main() -> Result<()> {
 
     let output_chk = bwterraingen::create_chk_from_wave(&wave.render(), rules.era, width, height);
 
-    std::fs::write("/home/stan/Downloads/out.chk", output_chk)?;
+    std::fs::write(dest, output_chk)?;
 
     anyhow::Ok(())
 }
