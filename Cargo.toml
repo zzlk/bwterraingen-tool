@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 bwterraingen = { git = "https://github.com/zzlk/bwterraingen.git" }
 
-image = { version = "*", features = ["png", "webp"] }
+#image = { version = "*", features = ["png", "webp"] }
 rand = { version = "*" }
 getrandom = { version = "0.2", features = ["js"] }
 cached = "*"
