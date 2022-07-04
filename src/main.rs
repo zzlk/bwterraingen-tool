@@ -29,7 +29,7 @@ fn main() -> Result<()> {
         .reduce(|x, y| x.combine(&y).unwrap())
         .unwrap();
 
-    let wave = Wave::new(width, height, &rules).logical_conclusion(
+    let wave = Wave::new(width, height, &rules, None, 0).logical_conclusion(
         &|x| {
             //x.print_wave();
             info!(
