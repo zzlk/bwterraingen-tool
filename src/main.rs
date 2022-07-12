@@ -31,14 +31,14 @@ fn main() -> Result<()> {
 
     let wave = Wave::new(width, height, &rules, None, 0).logical_conclusion(
         &|x| {
-            //x.print_wave();
+            x.print_wave();
             info!(
                 "non-null tiles: {:6} / {:6}",
                 x.render().into_iter().filter(|x| *x != 0).count(),
                 width * height
             );
         },
-        2500,
+        500,
     )?;
 
     let output_chk = bwterraingen::create_chk_from_wave(&wave.render(), rules.era, width, height);
