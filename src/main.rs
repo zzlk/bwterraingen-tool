@@ -1,5 +1,5 @@
 use anyhow::Result;
-use bwterraingen::{get_rules_from_chk, Wave};
+use bwterraingen::{get_rules_from_chk, Wave, Wave2};
 use std::env;
 use tracing::info;
 use tracing_log::LogTracer;
@@ -29,17 +29,30 @@ fn main() -> Result<()> {
         .reduce(|x, y| x.combine(&y).unwrap())
         .unwrap();
 
-    let wave = Wave::new(width, height, &rules, None, 0).logical_conclusion(
+    let wave = Wave2::new(width as isize, height as isize, &rules).logical_conclusion(
         &|x| {
             x.print_wave();
             info!(
                 "non-null tiles: {:6} / {:6}",
-                x.render().into_iter().filter(|x| *x != 0).count(),
+                x.render().into_iter().filter(|x| *x != 15).count(),
                 width * height
             );
         },
         500,
     )?;
+
+    info!("final wave:");
+    wave.print_wave();
+
+    let render = wave.render();
+
+    for y in 0..height {
+        let mut output = String::new();
+        for x in 0..width {
+            output = format!("{}{:6}", output, render[(x + y * width) as usize]);
+        }
+        info!("{}", output);
+    }
 
     let output_chk = bwterraingen::create_chk_from_wave(&wave.render(), rules.era, width, height);
 
