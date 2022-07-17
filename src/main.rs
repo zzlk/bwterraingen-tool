@@ -31,14 +31,15 @@ fn main() -> Result<()> {
 
     let wave = Wave2::new(width as isize, height as isize, &rules).logical_conclusion(
         &|x| {
-            x.print_wave();
-            info!(
-                "non-null tiles: {:6} / {:6}",
-                x.render().into_iter().filter(|x| *x != 15).count(),
-                width * height
-            );
+            // x.print_wave();
+            // info!(
+            //     "non-null tiles: {:6} / {:6}",
+            //     x.render().into_iter().filter(|x| *x != 15).count(),
+            //     width * height
+            // );
         },
         500,
+        4,
     )?;
 
     info!("final wave:");
