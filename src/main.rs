@@ -1,5 +1,5 @@
 use anyhow::Result;
-use bwterraingen::{get_rules_from_chk, Wave, Wave2};
+use bwterraingen::{get_rules_from_chk, Wave2};
 use std::env;
 use tracing::info;
 use tracing_log::LogTracer;
