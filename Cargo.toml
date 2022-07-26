@@ -9,7 +9,6 @@ bwterraingen = { git = "https://github.com/zzlk/bwterraingen.git" }
 #image = { version = "*", features = ["png", "webp"] }
 rand = { version = "*" }
 getrandom = { version = "0.2", features = ["js"] }
-cached = "*"
 
 anyhow = "*"
 tracing = "*"
