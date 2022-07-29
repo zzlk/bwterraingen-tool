@@ -1,5 +1,5 @@
 use anyhow::Result;
-use bwterraingen::{get_rules_from_chk, Wave2};
+use bwterraingen::{get_rules_from_chk, Rules, Wave2};
 use std::env;
 use tracing::info;
 use tracing_log::LogTracer;
@@ -18,32 +18,46 @@ fn main() -> Result<()> {
 
     anyhow::ensure!(args.len() > 4);
 
+    // let rules = args[4..]
+    //     .into_iter()
+    //     .filter_map(|arg| {
+    //         info!("filename: {arg}");
+    //         //let chk = get_chk_from_mpq_filename(arg.clone()).unwrap();
+    //         let chk = std::fs::read(arg).unwrap();
+    //         Some(get_rules_from_chk(&chk).unwrap())
+    //     })
+    //     .reduce(|x, y| x.combine(&y).unwrap())
+    //     .unwrap();
+
     let rules = args[4..]
         .into_iter()
-        .filter_map(|arg| {
+        .map(|arg| {
             info!("filename: {arg}");
             //let chk = get_chk_from_mpq_filename(arg.clone()).unwrap();
-            let chk = std::fs::read(arg).unwrap();
-            Some(get_rules_from_chk(&chk).unwrap())
+            let rules: Rules =
+                serde_json::from_str(std::fs::read_to_string(arg).unwrap().as_str()).unwrap();
+            rules
         })
         .reduce(|x, y| x.combine(&y).unwrap())
         .unwrap();
 
-    let wave = Wave2::new(width as isize, height as isize, &rules, None).logical_conclusion(
+    let mut wave = Wave2::new(width as isize, height as isize, &rules, None);
+
+    wave.logical_conclusion(
         &|x| {
-            x.print_wave();
-            info!(
-                "non-null tiles: {:6} / {:6}",
-                x.render().into_iter().filter(|x| *x != 15).count(),
-                width * height
-            );
+            // x.print_wave();
+            // info!(
+            //     "non-null tiles: {:6} / {:6}",
+            //     x.render().into_iter().filter(|x| *x != 15).count(),
+            //     width * height
+            // );
         },
         500,
         4,
     )?;
 
-    info!("final wave:");
-    wave.print_wave();
+    // info!("final wave:");
+    // wave.print_wave();
 
     let render = wave.render();
 

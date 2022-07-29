@@ -12,8 +12,11 @@ getrandom = { version = "0.2", features = ["js"] }
 
 anyhow = "*"
 tracing = "*"
-tracing-subscriber = { version = "*", features = ["registry", "env-filter"] }
+tracing-subscriber = { version = "*", default-features = false, features = ["fmt", "registry", "env-filter"] }
 tracing-log = "*"
+
+serde = "*"
+serde_json = "*"
 
 [dev-dependencies]
 quickcheck = "*"
