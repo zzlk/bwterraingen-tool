@@ -19,5 +19,3 @@ serde = "*"
 serde_json = "*"
 
 [dev-dependencies]
-quickcheck = "*"
-quickcheck_macros = "*"
